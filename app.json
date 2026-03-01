@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "GesDep",
+    "slug": "gesdep",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/favicon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.anonymous.gesdep"
+    }
+  }
+}
