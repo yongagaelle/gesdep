@@ -266,14 +266,14 @@ export const generateStatisticsReport = async (options: StatisticsPdfOptions) =>
           .summary-section {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-bottom: 40px;
+            gap: 20px;
+            margin-bottom: 30px;
           }
           
           .summary-card {
             background: white;
             border-radius: 16px;
-            padding: 32px;
+            padding: 12px;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             border: 2px solid transparent;
@@ -296,24 +296,24 @@ export const generateStatisticsReport = async (options: StatisticsPdfOptions) =>
           }
           
           .summary-card .label {
-            font-size: 13px;
+            font-size: 11px;
             color: #64748b;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
           }
           
           .summary-card .value {
-            font-size: 48px;
+            font-size: 18px;
             font-weight: 800;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             line-height: 1;
           }
           
           .summary-card .icon {
-            font-size: 32px;
-            margin-bottom: 16px;
+            font-size: 28px;
+            margin-bottom: 10px;
           }
           
           .summary-card.income .value {
@@ -351,26 +351,30 @@ export const generateStatisticsReport = async (options: StatisticsPdfOptions) =>
             margin-left: 8px;
           }
           
-          .chart-section {
-            margin-bottom: 40px;
+          .charts-container {
             page-break-inside: avoid;
             background: white;
             border-radius: 20px;
-            padding: 32px;
+            padding: 24px;
+            margin-bottom: 30px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
           }
           
+          .chart-section {
+            margin-bottom: 20px;
+          }
+          
           .chart-section h2 {
-            font-size: 28px;
+            font-size: 22px;
             color: #1e293b;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 800;
           }
           
           .chart-section .subtitle {
-            font-size: 15px;
+            font-size: 13px;
             color: #64748b;
-            margin-bottom: 28px;
+            margin-bottom: 16px;
           }
           
           .legend {
@@ -566,7 +570,7 @@ export const generateStatisticsReport = async (options: StatisticsPdfOptions) =>
         <div class="summary-section">
           <div class="summary-card income">
             <div class="icon">🎁</div>
-            <div class="label">Entrees Reçus</div>
+            <div class="label">Entrées Reçus</div>
             <div class="value">+${totalIncome.toFixed(2)}€</div>
           </div>
           
@@ -601,36 +605,38 @@ export const generateStatisticsReport = async (options: StatisticsPdfOptions) =>
           </table>
         </div>
 
-        <div class="chart-section">
-          <h2>📈 Évolution des Transactions</h2>
-          <div class="subtitle">Courbe d'évolution de vos dépenses et dons sur la période</div>
-          ${generateLineChartSVG()}
-          <div class="legend">
-            <div class="legend-item">
-              <div class="legend-dot expenses"></div>
-              <span class="legend-text">Dépenses</span>
-            </div>
-            <div class="legend-item">
-              <div class="legend-dot donations"></div>
-              <span class="legend-text">Dons</span>
+        <div class="charts-container">
+          <div class="chart-section">
+            <h2>📈 Évolution des Transactions</h2>
+            <div class="subtitle">Courbe d'évolution de vos entrées et sorties sur la période</div>
+            ${generateLineChartSVG()}
+            <div class="legend">
+              <div class="legend-item">
+                <div class="legend-dot expenses"></div>
+                <span class="legend-text">Sorties</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot donations"></div>
+                <span class="legend-text">Entrées</span>
+              </div>
             </div>
           </div>
-        </div>
-        
-        <div class="chart-section">
-          <h2>🍩 Répartition : Dépenses vs Dons</h2>
-          <div class="subtitle">Distribution proportionnelle de vos finances</div>
-          ${generateDonutChartSVG()}
-          <div class="donut-legend">
-            <div class="donut-legend-item expense">
-              <div class="percentage">${((Math.abs(totalExpense) / (Math.abs(totalExpense) + totalIncome)) * 100).toFixed(1)}%</div>
-              <div class="label">Dépenses</div>
-              <div class="amount">${Math.abs(totalExpense).toFixed(2)}€</div>
-            </div>
-            <div class="donut-legend-item income">
-              <div class="percentage">${((totalIncome / (Math.abs(totalExpense) + totalIncome)) * 100).toFixed(1)}%</div>
-              <div class="label">Dons</div>
-              <div class="amount">${totalIncome.toFixed(2)}€</div>
+          
+          <div class="chart-section">
+            <h2>🍩 Répartition : Sorties vs Entrées</h2>
+            <div class="subtitle">Distribution proportionnelle de vos finances</div>
+            ${generateDonutChartSVG()}
+            <div class="donut-legend">
+              <div class="donut-legend-item expense">
+                <div class="percentage">${((Math.abs(totalExpense) / (Math.abs(totalExpense) + totalIncome)) * 100).toFixed(1)}%</div>
+                <div class="label">Sorties</div>
+                <div class="amount">${Math.abs(totalExpense).toFixed(2)}€</div>
+              </div>
+              <div class="donut-legend-item income">
+                <div class="percentage">${((totalIncome / (Math.abs(totalExpense) + totalIncome)) * 100).toFixed(1)}%</div>
+                <div class="label">Entrées</div>
+                <div class="amount">${totalIncome.toFixed(2)}€</div>
+              </div>
             </div>
           </div>
         </div>
